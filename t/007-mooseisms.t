@@ -50,34 +50,14 @@ TODO: {
     cmp_ok($Test1OmniTrig::FIRINGS, '==', 0, 'omnitrigger does NOT fire on attribute with existing value and undefined init_arg during rebless');
 }
 
-# POSSIBLE MOOSE BUG #2. (DEEP BREATH.) DURING CONSTRUCTION OR REBLESSING, GIVEN TWO ATTRIBUTES "X"
-# AND "Y" THAT DON'T HAVE UNDEFINED init_argS AND ARE SUPPLIED WITH NEW VALUES VIA THE CONSTRUCTOR,
-# AND GIVEN THAT X'S TRIGGER CLEARS Y'S VALUE, AND GIVEN THAT $Y->should_coerce IS FALSE, THEN (DEEP
-# BREATH), WHEN X FIRES ON ACCOUNT OF ITS NEW VALUE NEAR THE END OF CONSTRUCTION/FIXUP (ASSUMING X
-# FIRES BEFORE Y, WHICH IT MIGHT NOT), Y'S TRIGGER WILL RECEIVE AS ITS "NEW VALUE" ARGUMENT THE
-# VALUE SUPPLIED VIA THE CONSTRUCTOR, EVEN THOUGH Y NO LONGER *HAS* A VALUE. (GASPING AND A LITTLE
-# WEEPING.)
+# POSSIBLE MOOSE BUG #2. WHEN A TRIGGER IS FIRED FOR AN ATTRIBUTE DURING _call_all_triggers, IF
+# $attr->should_coerce IS FALSE, THE TRIGGER CALLBACK WILL RECEIVE AS ITS NEWVAL ARG WHATEVER VALUE
+# WAS SUPPLIED TO THE CONSTRUCTOR, EVEN IF THE ATTRIBUTE VALUE HAS SINCE CHANGED OR BEEN CLEARED.
 
 BEGIN { package _SortedAttributes;
 
-    Moose::Exporter->setup_import_methods;
-
-    my (undef, undef, $init_meta_method) = Moose::Exporter->build_import_methods(
-
-        install => [qw(import unimport)],
-
-        class_metaroles => {
-
-            class => [qw(_SortedAttributes::MetaRole::Class)],
-        },
-    );
-
-    sub init_meta { goto $init_meta_method }
-}
-
-BEGIN { package _SortedAttributes::MetaRole::Class;
-
-    use Moose::Role;
+    use Moose;
+        extends 'Moose::Meta::Class';
 
     around get_all_attributes => sub {
 
@@ -89,13 +69,13 @@ BEGIN { package _SortedAttributes::MetaRole::Class;
     };
 }
 
-{ package Test2RegTrig; use Moose; BEGIN { _SortedAttributes->import }
+{ package Test2RegTrig; use Moose -metaclass => '_SortedAttributes';
 
     our @NEWVALS;
 
-    has X => (is => 'rw', isa => 'Any', trigger => sub { shift->clear_B });
+    has X => (is => 'rw', isa => 'Any', trigger => sub { shift->clear_Y });
 
-    has Y => (is => 'rw', isa => 'Any', clearer => 'clear_B', trigger => sub {
+    has Y => (is => 'rw', isa => 'Any', clearer => 'clear_Y', trigger => sub {
 
         my ($self, $new, $old) = (shift, @_);
 
@@ -128,9 +108,9 @@ TODO: {
 
     our @NEWVALS;
 
-    has X => (is => 'rw', isa => 'Any', omnitrigger => sub { shift->clear_B });
+    has X => (is => 'rw', isa => 'Any', omnitrigger => sub { shift->clear_Y });
 
-    has Y => (is => 'rw', isa => 'Any', clearer => 'clear_B', omnitrigger => sub {
+    has Y => (is => 'rw', isa => 'Any', clearer => 'clear_Y', omnitrigger => sub {
 
         my ($self, $attr_name, $new, $old) = (shift, @_);
 

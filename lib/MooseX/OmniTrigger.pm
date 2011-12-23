@@ -8,7 +8,7 @@ use Moose::Util::MetaRole ();
 
 { package MooseX::OmniTrigger;
 
-    our $VERSION = '0.01';
+    our $VERSION = '0.02';
 
     Moose::Exporter->setup_import_methods;
 
@@ -870,17 +870,9 @@ call stack are quietly prevented.
 
 =head1 CAVEATS
 
-For application to roles, this module won't work as synopsized for any Moose older than version
-1.9900, owing to the fact that roles back then didn't have an attribute metaclass. If you want to
-use omnitriggers in role attributes for an old Moose, supply the attribute trait explicitly:
-
-{ package MyRole;
-
-    use Moose::Role;
-    use MooseX::OmniTrigger;
-
-    has foo => (traits => [qw(OmniTrigger)], is => 'rw', isa => 'Str', omnitrigger => sub { ... });
-}
+MooseX::OmniTrigger currently relies on Moose::Meta::Class::_call_all_triggers and so requires Moose
+2.02. If you've an interest in using this module but are unable to upgrade to the required Moose,
+please let me know and I'll look into providing some backward compatibility.
 
 =head1 AUTHOR
 

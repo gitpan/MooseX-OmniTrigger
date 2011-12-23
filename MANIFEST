@@ -19,3 +19,6 @@ t/101-STOLEN_MOOSE_TEST-trigger_and_coerce.t
 t/102-STOLEN_MOOSE_TEST-immutable_trigger_from_constructor.t
 t/103-STOLEN_MOOSE_TEST-array_trigger.t
 t/104-STOLEN_MOOSE_TEST-hash_trigger.t
+Makefile.PL
+META.yml
+META.json

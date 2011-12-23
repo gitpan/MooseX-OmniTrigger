@@ -19,7 +19,7 @@ my $builder = Module::Build->new(
 
     requires => {
 
-        'Moose'                => 0,
+        'Moose'                => 2.0200,
         'namespace::autoclean' => 0,
     },
 
