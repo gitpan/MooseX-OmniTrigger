@@ -1,4 +1,10 @@
 Revision history for MooseX-OmniTrigger
 
-0.02    2011-12-22
+0.01    2011-12-22
         First version, released on an unsuspecting world.
+
+0.02    2011-12-22
+        Second first version, released on an unsuspecting world.
+
+0.03    2011-12-23
+        * Minor doc changes.

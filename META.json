@@ -35,7 +35,7 @@
    "provides" : {
       "MooseX::OmniTrigger" : {
          "file" : "lib/MooseX/OmniTrigger.pm",
-         "version" : "0.02"
+         "version" : "0.03"
       },
       "MooseX::OmniTrigger::MetaRole::AppToClass" : {
          "file" : "lib/MooseX/OmniTrigger.pm",
@@ -80,5 +80,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.02"
+   "version" : "0.03"
 }
