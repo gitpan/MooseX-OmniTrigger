@@ -3,7 +3,12 @@ use strict; use warnings; use warnings (FATAL => qw(misc numeric uninitialized))
 use Test::More;
 use Test::Fatal;
 
-BEGIN { use_ok($_) or plan skip_all => "$_ not installed" for 'MooseX::Declare' }
+BEGIN {
+
+    eval("use MooseX::Declare");
+
+    plan skip_all => "MooseX::Declare isn't installed or wouldn't load" if $@;
+}
 
 class MyClass1 {
 

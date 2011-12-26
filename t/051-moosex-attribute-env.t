@@ -5,14 +5,16 @@ use Test::Fatal;
 
 BEGIN {
 
-    eval("use MooseX::LazyRequire");
+    eval("use MooseX::Attribute::ENV");
 
-    plan skip_all => "MooseX::LazyRequire isn't installed or wouldn't load" if $@;
+    plan skip_all => "MooseX::Attribute::ENV isn't installed or wouldn't load" if $@;
 }
 
-{ package MyClass; use Moose; use MooseX::LazyRequire; use MooseX::OmniTrigger;
+local $ENV{foo} = 'FOO';
 
-    has foo => (lazy_required => 1, is => 'rw', isa => 'Str', omnitrigger => \&_capture_changes);
+{ package MyClass; use Moose; use MooseX::Attribute::ENV; use MooseX::OmniTrigger;
+
+    has foo => (traits => [qw(ENV)], is => 'rw', isa => 'Str', omnitrigger => \&_capture_changes);
 
     has changes => (is => 'ro', isa => 'ArrayRef', default => sub { [] });
 
@@ -38,11 +40,9 @@ for my $class (qw(MyClass)) {
 
         my $obj;
 
-        is(exception { $obj = MyClass->new }, undef, 'nothing blew up -- LazyRequire must have worked') or last TEST;
+        is(exception { $obj = MyClass->new }, undef, 'nothing blew up') or last TEST;
 
-        $obj->foo('POW');
-
-        is("@{$obj->changes}", 'foo:NOVAL=>POW', 'omnitrigger fired');
+        is("@{$obj->changes}", 'foo:NOVAL=>FOO', 'omnitrigger fired');
 
         $class->meta->make_immutable, redo TEST if $class->meta->is_mutable;
     }

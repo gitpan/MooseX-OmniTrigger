@@ -12,6 +12,7 @@ t/005-clone.t
 t/006-recursion.t
 t/007-mooseisms.t
 t/050-moosex-declare.t
+t/051-moosex-attribute-env.t
 t/052-moosex-lazy_require.t
 t/099-cleanup.t
 t/100-STOLEN_MOOSE_TEST-attribute_triggers.t
