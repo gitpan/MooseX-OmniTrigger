@@ -8,7 +8,7 @@ build_requires:
 configure_requires:
   Module::Build: 0.38
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112150'
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110440'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -17,7 +17,7 @@ name: MooseX-OmniTrigger
 provides:
   MooseX::OmniTrigger:
     file: lib/MooseX/OmniTrigger.pm
-    version: 0.04
+    version: 0.05
   MooseX::OmniTrigger::MetaRole::AppToClass:
     file: lib/MooseX/OmniTrigger.pm
     version: 0
@@ -50,4 +50,4 @@ requires:
   namespace::autoclean: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.04
+version: 0.05

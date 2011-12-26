@@ -8,7 +8,7 @@ use Moose::Util::MetaRole ();
 
 { package MooseX::OmniTrigger;
 
-    our $VERSION = '0.04';
+    our $VERSION = '0.05';
 
     Moose::Exporter->setup_import_methods;
 
@@ -793,7 +793,7 @@ set, or clear operation.
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =head1 SYNOPSIS
 

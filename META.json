@@ -4,7 +4,7 @@
       "Todd Lorenz <trlorenz@hotmail.com>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112150",
+   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.110440",
    "license" : [
       "perl_5"
    ],
@@ -35,7 +35,7 @@
    "provides" : {
       "MooseX::OmniTrigger" : {
          "file" : "lib/MooseX/OmniTrigger.pm",
-         "version" : "0.04"
+         "version" : "0.05"
       },
       "MooseX::OmniTrigger::MetaRole::AppToClass" : {
          "file" : "lib/MooseX/OmniTrigger.pm",
@@ -80,5 +80,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.04"
+   "version" : "0.05"
 }

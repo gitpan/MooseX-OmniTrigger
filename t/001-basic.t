@@ -3,24 +3,19 @@ use strict; use warnings; use warnings (FATAL => qw(misc numeric uninitialized))
 use Test::Fatal;
 use Test::More;
 
-{ package TYPES;
+use Moose::Util::TypeConstraints;
 
-    use MooseX::Types -declare => [qw(Exciting)];
+subtype 'Exciting',
+    as 'Str',
+        where { /!$/ };
 
-    use MooseX::Types::Moose qw(Str);
+coerce 'Exciting',
+    from 'Str',
+        via { "$_!" };
 
-    subtype Exciting,
-        as Str,
-            where { /!$/ };
-
-    coerce Exciting,
-        from Str,
-            via { "$_!" };
-}
+no Moose::Util::TypeConstraints;
 
 my $stuff = <<'END';
-    BEGIN { import TYPES qw(Exciting) }
-
     has poo => (is => 'rw', isa => 'Str', omnitrigger => sub {
 
         my ($self_aka_instance, $attr_name, $new_val, $old_val) = (shift, @_);
@@ -33,14 +28,14 @@ my $stuff = <<'END';
         ::isa_ok($old_val, 'ARRAY', '4th arg to omnitrigger');
     });
 
-    has foo => (is => 'rw', isa => Exciting, coerce => 1,                          clearer => '_clear_foo', omnitrigger => \&_capture_changes);
-    has bar => (is => 'rw', isa => Exciting, coerce => 1, default => 'DEFAULT'   ,                          omnitrigger => \&_capture_changes);
-    has baz => (is => 'rw', isa => Exciting, coerce => 1, builder => '_build_bar',                          omnitrigger => \&_capture_changes);
+    has foo => (is => 'rw', isa => 'Exciting', coerce => 1,                          clearer => '_clear_foo', omnitrigger => \&_capture_changes);
+    has bar => (is => 'rw', isa => 'Exciting', coerce => 1, default => 'DEFAULT'   ,                          omnitrigger => \&_capture_changes);
+    has baz => (is => 'rw', isa => 'Exciting', coerce => 1, builder => '_build_bar',                          omnitrigger => \&_capture_changes);
 
-    has blo => (is => 'ro', isa => Exciting, coerce => 1, default => 'DEFAULT', omnitrigger => \&_capture_changes);
+    has blo => (is => 'ro', isa => 'Exciting', coerce => 1, default => 'DEFAULT', omnitrigger => \&_capture_changes);
 
-    has goo => (is => 'rw', isa => Exciting, coerce => 1, default => 'DEFAULT'   , lazy => 1, clearer => '_clear_goo', omnitrigger => \&_capture_changes);
-    has moo => (is => 'rw', isa => Exciting, coerce => 1, builder => '_build_bar', lazy => 1, clearer => '_clear_moo', omnitrigger => \&_capture_changes);
+    has goo => (is => 'rw', isa => 'Exciting', coerce => 1, default => 'DEFAULT'   , lazy => 1, clearer => '_clear_goo', omnitrigger => \&_capture_changes);
+    has moo => (is => 'rw', isa => 'Exciting', coerce => 1, builder => '_build_bar', lazy => 1, clearer => '_clear_moo', omnitrigger => \&_capture_changes);
 
     has changes => (is => 'ro', isa => 'HashRef', default => sub { {} });
 
@@ -50,7 +45,7 @@ my $stuff = <<'END';
 
     has weaklings => (is => 'ro', isa => 'HashRef', default => sub { {} });
 
-    has ziz => (is => 'rw', isa => Exciting, coerce => 1,
+    has ziz => (is => 'rw', isa => 'Exciting', coerce => 1,
 
         initializer => sub {
 

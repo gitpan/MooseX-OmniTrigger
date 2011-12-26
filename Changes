@@ -16,3 +16,6 @@ Revision history for MooseX-OmniTrigger
         * Added test:
             t/051-moosex-attribute-env.t
         * Minor doc changes.
+
+0.05    2011-12-26
+        * Removed dependency in test 001-basic.t.
