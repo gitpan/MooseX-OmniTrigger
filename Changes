@@ -19,3 +19,6 @@ Revision history for MooseX-OmniTrigger
 
 0.05    2011-12-26
         * Removed dependency in test 001-basic.t.
+
+0.06    2011-12-28
+        * Added build requirement: Hash::Util::FieldHash.

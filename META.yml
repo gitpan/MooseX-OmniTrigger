@@ -17,7 +17,7 @@ name: MooseX-OmniTrigger
 provides:
   MooseX::OmniTrigger:
     file: lib/MooseX/OmniTrigger.pm
-    version: 0.05
+    version: 0.06
   MooseX::OmniTrigger::MetaRole::AppToClass:
     file: lib/MooseX/OmniTrigger.pm
     version: 0
@@ -46,8 +46,9 @@ provides:
     file: lib/MooseX/OmniTrigger.pm
     version: 0
 requires:
+  Hash::Util::FieldHash: 0
   Moose: 2.02
   namespace::autoclean: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.05
+version: 0.06

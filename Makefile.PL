@@ -11,7 +11,8 @@ WriteMakefile
                    'Test::More' => 0,
                    'namespace::autoclean' => 0,
                    'Test::Exception' => 0,
-                   'Moose' => '2.02'
+                   'Moose' => '2.02',
+                   'Hash::Util::FieldHash' => 0
                  }
 )
 ;

@@ -27,6 +27,7 @@
       },
       "runtime" : {
          "requires" : {
+            "Hash::Util::FieldHash" : 0,
             "Moose" : "2.02",
             "namespace::autoclean" : 0
          }
@@ -35,7 +36,7 @@
    "provides" : {
       "MooseX::OmniTrigger" : {
          "file" : "lib/MooseX/OmniTrigger.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       },
       "MooseX::OmniTrigger::MetaRole::AppToClass" : {
          "file" : "lib/MooseX/OmniTrigger.pm",
@@ -80,5 +81,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.05"
+   "version" : "0.06"
 }

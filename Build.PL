@@ -19,8 +19,9 @@ my $builder = Module::Build->new(
 
     requires => {
 
-        'Moose'                => 2.0200,
-        'namespace::autoclean' => 0,
+        'Hash::Util::FieldHash' => 0,
+        'Moose'                 => 2.0200,
+        'namespace::autoclean'  => 0,
     },
 
     add_to_cleanup => ['MooseX-OmniTrigger-*'],

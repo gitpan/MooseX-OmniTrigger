@@ -2,13 +2,13 @@ use strict; use warnings; use warnings (FATAL => qw(misc numeric uninitialized))
 
 use Class::Load ();
 use Hash::Util::FieldHash ();
-use Moose ();
+use Moose 2.0200 ();
 use Moose::Exporter ();
 use Moose::Util::MetaRole ();
 
 { package MooseX::OmniTrigger;
 
-    our $VERSION = '0.05';
+    our $VERSION = '0.06';
 
     Moose::Exporter->setup_import_methods;
 
@@ -22,8 +22,8 @@ use Moose::Util::MetaRole ();
 
             Moose->VERSION >= 1.9900 ? (applied_attribute => [qw(MooseX::OmniTrigger::MetaRole::Attribute)]) : (),
 
-            application_to_class => [qw(MooseX::OmniTrigger::MetaRole::AppToClass)],
             application_to_role  => [qw(MooseX::OmniTrigger::MetaRole::AppToRole )],
+            application_to_class => [qw(MooseX::OmniTrigger::MetaRole::AppToClass)],
         },
 
         class_metaroles => {
@@ -793,7 +793,7 @@ set, or clear operation.
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =head1 SYNOPSIS
 
